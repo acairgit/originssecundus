@@ -1,0 +1,5 @@
+{
+  "type": "originssecundus:passive",
+  "name": "Webbing",
+  "description": "When you hit an enemy in melee, they get stuck in cobweb."
+}

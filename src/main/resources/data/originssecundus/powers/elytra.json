@@ -1,5 +1,5 @@
 {
   "type": "originssecundus:passive",
   "name": "Winged",
-  "description": "You have Elytra wings without needing to equip any. Gameplay support is stubbed for the model pass."
+  "description": "You have Elytra wings without needing to equip any. Free elytra flight needs a dedicated NeoForge hook pass."
 }

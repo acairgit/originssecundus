@@ -1,0 +1,5 @@
+{
+  "type": "originssecundus:passive",
+  "name": "No Cobweb Slowdown",
+  "description": "You can move through cobwebs without the usual slowdown."
+}

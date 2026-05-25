@@ -1,5 +1,9 @@
 {
-  "type": "originssecundus:passive",
+  "type": "originssecundus:status_effect",
   "name": "Fast Metabolism",
-  "description": "Being phantomized causes you to become hungry."
+  "description": "Being phantomized causes you to become hungry.",
+  "effect": "minecraft:hunger",
+  "duration": 80,
+  "condition": "phantomized",
+  "show_particles": false
 }

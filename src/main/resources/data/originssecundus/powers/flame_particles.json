@@ -1,0 +1,7 @@
+{
+  "type": "originssecundus:particles",
+  "name": "Flame Particles",
+  "description": "You emit flame particles.",
+  "particle": "minecraft:flame",
+  "interval_ticks": 8
+}

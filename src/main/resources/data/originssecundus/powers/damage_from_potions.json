@@ -1,0 +1,5 @@
+{
+  "type": "originssecundus:passive",
+  "name": "Potion Vulnerability",
+  "description": "Some splash and lingering potions damage you. Full potion conversion is reserved for the Apoli compatibility pass."
+}

@@ -1,0 +1,8 @@
+{
+  "type": "originssecundus:attribute",
+  "name": "Sturdy Skin",
+  "description": "Even without wearing armor, your skin provides natural protection.",
+  "attribute": "minecraft:generic.armor",
+  "amount": 4.0,
+  "operation": "add_value"
+}

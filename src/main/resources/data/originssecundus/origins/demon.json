@@ -6,7 +6,10 @@
     "originssecundus:nether_spawn",
     "originssecundus:burning_wrath",
     "originssecundus:hotblooded",
-    "originssecundus:water_vulnerability"
+    "originssecundus:water_vulnerability",
+    "originssecundus:flame_particles",
+    "originssecundus:damage_from_snowballs",
+    "originssecundus:damage_from_potions"
   ],
   "icon": {
     "item": "minecraft:blaze_powder"

@@ -9,6 +9,7 @@ import net.ironhalo.originssecundus.data.OriginDefinition;
 import net.ironhalo.originssecundus.data.PowerDefinition;
 import net.ironhalo.originssecundus.origin.PlayerOrigin;
 import net.minecraft.core.Holder;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -18,11 +19,15 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.ThrownEnderpearl;
+import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 import net.minecraft.server.level.ServerPlayer;
@@ -35,6 +40,12 @@ public final class PowerEngine {
     private static final ResourceLocation CUSTOM_HEIGHT_MODIFIER = OriginsSecundus.id("customization/height");
 
     private PowerEngine() {
+    }
+
+    public static boolean hasPower(Player player, String path) {
+        return PlayerOrigin.selectedOrigin(player)
+                .map(origin -> OriginDataManager.powersFor(origin).stream().anyMatch(power -> power.id().getPath().equals(path)))
+                .orElse(false);
     }
 
     public static void tick(ServerPlayer player) {
@@ -50,12 +61,20 @@ public final class PowerEngine {
         for (PowerDefinition power : powers) {
             if (power.is("attribute")) {
                 applyAttribute(player, power);
+            } else if (power.is("attributes")) {
+                applyAttributes(player, power);
             } else if (power.is("status_effect")) {
                 applyStatusEffect(player, power);
             } else if (power.is("effect_immunity")) {
                 applyEffectImmunity(player, power);
             } else if (power.is("damage_over_time")) {
                 applyDamageOverTime(player, power);
+            } else if (power.is("air")) {
+                applyAir(player, power);
+            } else if (power.is("burn_in_daylight")) {
+                applyBurnInDaylight(player, power);
+            } else if (power.is("particles")) {
+                applyParticles(player, power);
             } else if (power.is("fire_immunity")) {
                 player.clearFire();
             } else if (power.is("climbing")) {
@@ -103,6 +122,12 @@ public final class PowerEngine {
                 if (power.is("active_launch")) {
                     launch(player, power);
                     return;
+                } else if (power.is("active_ender_pearl")) {
+                    throwEnderPearl(player, power);
+                    return;
+                } else if (power.is("phantomize")) {
+                    togglePhantomized(player);
+                    return;
                 }
             }
         });
@@ -124,6 +149,27 @@ public final class PowerEngine {
         player.getPersistentData().putLong(cooldownKey, now + cooldown);
     }
 
+    private static void throwEnderPearl(ServerPlayer player, PowerDefinition power) {
+        String cooldownKey = "OriginsSecundusCooldown_" + power.id().toString();
+        long now = player.level().getGameTime();
+        long readyAt = player.getPersistentData().getLong(cooldownKey);
+        if (readyAt > now) {
+            long seconds = Math.max(1L, (readyAt - now) / 20L);
+            player.displayClientMessage(Component.literal("Power cooldown: " + seconds + "s"), true);
+            return;
+        }
+        ThrownEnderpearl pearl = new ThrownEnderpearl(player.level(), player);
+        pearl.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
+        player.level().addFreshEntity(pearl);
+        player.getPersistentData().putLong(cooldownKey, now + GsonHelper.getAsInt(power.data(), "cooldown_ticks", 100));
+    }
+
+    private static void togglePhantomized(ServerPlayer player) {
+        boolean phantomized = player.getPersistentData().getBoolean("OriginsSecundusPhantomized");
+        player.getPersistentData().putBoolean("OriginsSecundusPhantomized", !phantomized);
+        player.displayClientMessage(Component.literal(!phantomized ? "Phantom form" : "Normal form"), true);
+    }
+
     private static void applyAttribute(ServerPlayer player, PowerDefinition power) {
         Holder<Attribute> attribute = resolveAttribute(GsonHelper.getAsString(power.data(), "attribute", ""));
         if (attribute == null) {
@@ -143,6 +189,18 @@ public final class PowerEngine {
         instance.addOrUpdateTransientModifier(modifier);
         if (attribute == Attributes.MAX_HEALTH && player.getHealth() > player.getMaxHealth()) {
             player.setHealth(player.getMaxHealth());
+        }
+    }
+
+    private static void applyAttributes(ServerPlayer player, PowerDefinition power) {
+        if (!power.data().has("modifiers")) {
+            return;
+        }
+        JsonArray modifiers = GsonHelper.getAsJsonArray(power.data(), "modifiers");
+        for (JsonElement element : modifiers) {
+            if (element instanceof JsonObject object) {
+                applyAttribute(player, new PowerDefinition(power.id(), "originssecundus:attribute", power.name(), power.description(), object));
+            }
         }
     }
 
@@ -177,17 +235,28 @@ public final class PowerEngine {
 
     private static void clearLoadedAttributeModifiers(ServerPlayer player) {
         for (PowerDefinition power : OriginDataManager.allPowers()) {
-            if (!power.is("attribute")) {
+            if (power.is("attributes") && power.data().has("modifiers")) {
+                for (JsonElement element : GsonHelper.getAsJsonArray(power.data(), "modifiers")) {
+                    if (element instanceof JsonObject object) {
+                        clearOneAttributeModifier(player, power, object);
+                    }
+                }
                 continue;
             }
-            Holder<Attribute> attribute = resolveAttribute(GsonHelper.getAsString(power.data(), "attribute", ""));
-            if (attribute == null) {
-                continue;
+            if (power.is("attribute")) {
+                clearOneAttributeModifier(player, power, power.data());
             }
-            AttributeInstance instance = player.getAttribute(attribute);
-            if (instance != null) {
-                instance.removeModifier(modifierId(power));
-            }
+        }
+    }
+
+    private static void clearOneAttributeModifier(ServerPlayer player, PowerDefinition power, JsonObject data) {
+        Holder<Attribute> attribute = resolveAttribute(GsonHelper.getAsString(data, "attribute", ""));
+        if (attribute == null) {
+            return;
+        }
+        AttributeInstance instance = player.getAttribute(attribute);
+        if (instance != null) {
+            instance.removeModifier(modifierId(power, data));
         }
     }
 
@@ -240,6 +309,34 @@ public final class PowerEngine {
         player.hurt(player.damageSources().generic(), GsonHelper.getAsFloat(power.data(), "amount", 1.0F));
     }
 
+    private static void applyAir(ServerPlayer player, PowerDefinition power) {
+        if (matchesCondition(player, GsonHelper.getAsString(power.data(), "condition", ""))) {
+            player.setAirSupply(player.getMaxAirSupply());
+        }
+    }
+
+    private static void applyBurnInDaylight(ServerPlayer player, PowerDefinition power) {
+        if (!matchesCondition(player, GsonHelper.getAsString(power.data(), "condition", "always"))) {
+            return;
+        }
+        Level level = player.level();
+        if (level.isDay() && level.canSeeSky(player.blockPosition()) && !player.isInWaterRainOrBubble()) {
+            player.setRemainingFireTicks(Math.max(player.getRemainingFireTicks(), GsonHelper.getAsInt(power.data(), "fire_ticks", 80)));
+        }
+    }
+
+    private static void applyParticles(ServerPlayer player, PowerDefinition power) {
+        if (player.tickCount % GsonHelper.getAsInt(power.data(), "interval_ticks", 8) != 0) {
+            return;
+        }
+        String particle = GsonHelper.getAsString(power.data(), "particle", "minecraft:cloud");
+        if ("minecraft:flame".equals(particle)) {
+            player.serverLevel().sendParticles(ParticleTypes.FLAME, player.getX(), player.getY() + 0.5D, player.getZ(), 1, 0.25D, 0.35D, 0.25D, 0.01D);
+        } else if ("minecraft:portal".equals(particle)) {
+            player.serverLevel().sendParticles(ParticleTypes.PORTAL, player.getX(), player.getY() + 0.5D, player.getZ(), 2, 0.25D, 0.45D, 0.25D, 0.02D);
+        }
+    }
+
     private static void applySimpleClimbing(ServerPlayer player) {
         if (player.horizontalCollision && player.zza > 0.0F && !player.isShiftKeyDown()) {
             player.setDeltaMovement(player.getDeltaMovement().x, 0.22D, player.getDeltaMovement().z);
@@ -258,6 +355,8 @@ public final class PowerEngine {
             case "on_fire" -> player.isOnFire();
             case "sprinting" -> player.isSprinting();
             case "fall_flying" -> player.isFallFlying();
+            case "phantomized" -> player.getPersistentData().getBoolean("OriginsSecundusPhantomized");
+            case "not_phantomized" -> !player.getPersistentData().getBoolean("OriginsSecundusPhantomized");
             default -> false;
         };
     }
@@ -268,6 +367,7 @@ public final class PowerEngine {
             case "fall" -> source.is(DamageTypeTags.IS_FALL);
             case "kinetic" -> source.is(DamageTypeTags.IS_FALL) || source.getMsgId().contains("flyIntoWall");
             case "water" -> source.getMsgId().contains("drown");
+            case "snowball" -> source.getMsgId().contains("thrown") || source.getMsgId().contains("snowball");
             case "" -> false;
             default -> source.getMsgId().equals(damage);
         };
@@ -281,6 +381,13 @@ public final class PowerEngine {
             case "minecraft:generic.armor", "generic.armor", "armor" -> Attributes.ARMOR;
             case "minecraft:generic.attack_damage", "generic.attack_damage", "attack_damage" -> Attributes.ATTACK_DAMAGE;
             case "minecraft:generic.scale", "generic.scale", "scale" -> Attributes.SCALE;
+            case "minecraft:generic.armor_toughness", "generic.armor_toughness", "armor_toughness" -> Attributes.ARMOR_TOUGHNESS;
+            case "minecraft:generic.block_interaction_range", "generic.block_interaction_range", "block_interaction_range" -> Attributes.BLOCK_INTERACTION_RANGE;
+            case "minecraft:generic.entity_interaction_range", "generic.entity_interaction_range", "entity_interaction_range" -> Attributes.ENTITY_INTERACTION_RANGE;
+            case "minecraft:generic.block_break_speed", "generic.block_break_speed", "block_break_speed" -> Attributes.BLOCK_BREAK_SPEED;
+            case "minecraft:generic.submerged_mining_speed", "generic.submerged_mining_speed", "submerged_mining_speed" -> Attributes.SUBMERGED_MINING_SPEED;
+            case "minecraft:generic.water_movement_efficiency", "generic.water_movement_efficiency", "water_movement_efficiency" -> Attributes.WATER_MOVEMENT_EFFICIENCY;
+            case "minecraft:generic.oxygen_bonus", "generic.oxygen_bonus", "oxygen_bonus" -> Attributes.OXYGEN_BONUS;
             default -> null;
         };
     }
@@ -294,6 +401,11 @@ public final class PowerEngine {
     }
 
     private static ResourceLocation modifierId(PowerDefinition power) {
+        return modifierId(power, power.data());
+    }
+
+    private static ResourceLocation modifierId(PowerDefinition power, JsonObject data) {
+        String attribute = GsonHelper.getAsString(data, "attribute", "attribute").replace(':', '_').replace('.', '_').replace('/', '_');
         return OriginsSecundus.id("power/" + power.id().getNamespace() + "/" + power.id().getPath().replace('/', '_'));
     }
 }

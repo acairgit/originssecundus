@@ -1,0 +1,7 @@
+{
+  "type": "originssecundus:damage_modifier",
+  "name": "Snowball Vulnerability",
+  "description": "You take damage from snowballs.",
+  "damage": "snowball",
+  "multiplier": 3.0
+}

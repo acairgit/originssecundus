@@ -2,11 +2,14 @@
   "name": "Phantom",
   "description": "As half-human and half-phantom beings, these creatures can switch between a phantom and a normal form. The toggle pipeline is stubbed for a later pass.",
   "powers": [
+    "originssecundus:phantomize",
     "originssecundus:translucent",
     "originssecundus:phasing",
     "originssecundus:invisibility",
     "originssecundus:hunger_over_time",
-    "originssecundus:burn_in_daylight"
+    "originssecundus:burn_in_daylight",
+    "originssecundus:fragile",
+    "originssecundus:phantomize_overlay"
   ],
   "icon": {
     "item": "minecraft:phantom_membrane"

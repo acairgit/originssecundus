@@ -1,0 +1,6 @@
+{
+  "type": "originssecundus:active_ender_pearl",
+  "name": "Teleportation",
+  "description": "Whenever you want, you may throw an ender pearl which deals no damage, allowing you to teleport.",
+  "cooldown_ticks": 100
+}

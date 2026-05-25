@@ -1,0 +1,19 @@
+{
+  "name": "Shulk",
+  "description": "Related to Shulkers, the bodies of the Shulk are outfitted with a protective shell-like skin.",
+  "powers": [
+    "originssecundus:shulker_inventory",
+    "originssecundus:natural_armor",
+    "originssecundus:strong_arms",
+    "originssecundus:strong_arms_break_speed",
+    "originssecundus:no_shield",
+    "originssecundus:more_exhaustion"
+  ],
+  "icon": {
+    "item": "minecraft:shulker_shell"
+  },
+  "order": 55,
+  "impact": 1,
+  "accent_color": "#8b6b91",
+  "model_hint": "shulk"
+}

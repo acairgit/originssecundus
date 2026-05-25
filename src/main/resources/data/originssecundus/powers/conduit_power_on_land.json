@@ -1,0 +1,9 @@
+{
+  "type": "originssecundus:status_effect",
+  "name": "Conduit Power on Land",
+  "description": "You benefit from conduit power while outside water.",
+  "effect": "minecraft:conduit_power",
+  "duration": 80,
+  "condition": "not_in_water",
+  "show_particles": false
+}

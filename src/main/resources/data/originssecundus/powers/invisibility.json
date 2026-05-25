@@ -1,5 +1,9 @@
 {
-  "type": "originssecundus:passive",
+  "type": "originssecundus:status_effect",
   "name": "Invisibility",
-  "description": "While phantomized, you are invisible."
+  "description": "While phantomized, you are invisible.",
+  "effect": "minecraft:invisibility",
+  "duration": 40,
+  "condition": "phantomized",
+  "show_particles": false
 }

@@ -1,0 +1,21 @@
+{
+  "name": "Blazeborn",
+  "description": "Late descendants of the Blaze, the Blazeborn are naturally immune to the perils of the Nether.",
+  "powers": [
+    "originssecundus:fire_immunity",
+    "originssecundus:nether_spawn",
+    "originssecundus:burning_wrath",
+    "originssecundus:hotblooded",
+    "originssecundus:water_vulnerability",
+    "originssecundus:flame_particles",
+    "originssecundus:damage_from_snowballs",
+    "originssecundus:damage_from_potions"
+  ],
+  "icon": {
+    "item": "minecraft:blaze_powder"
+  },
+  "order": 35,
+  "impact": 3,
+  "accent_color": "#c56b2d",
+  "model_hint": "demon"
+}

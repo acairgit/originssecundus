@@ -1,0 +1,5 @@
+{
+  "type": "originssecundus:passive",
+  "name": "Air from Potions",
+  "description": "Water breathing potions restore air while underwater."
+}

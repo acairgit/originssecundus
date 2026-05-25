@@ -1,0 +1,8 @@
+{
+  "type": "originssecundus:attribute",
+  "name": "Strong Arms Break Speed",
+  "description": "You break natural stone faster with bare hands.",
+  "attribute": "minecraft:generic.block_break_speed",
+  "amount": 0.25,
+  "operation": "add_multiplied_total"
+}

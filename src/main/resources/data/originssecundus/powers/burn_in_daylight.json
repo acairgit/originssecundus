@@ -1,5 +1,7 @@
 {
-  "type": "originssecundus:passive",
+  "type": "originssecundus:burn_in_daylight",
   "name": "Photoallergic",
-  "description": "You begin to burn in daylight if you are not invisible."
+  "description": "You begin to burn in daylight if you are not invisible.",
+  "condition": "not_phantomized",
+  "fire_ticks": 80
 }

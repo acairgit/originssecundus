@@ -1,0 +1,7 @@
+{
+  "type": "originssecundus:particles",
+  "name": "Ender Particles",
+  "description": "You emit ender particles.",
+  "particle": "minecraft:portal",
+  "interval_ticks": 8
+}
