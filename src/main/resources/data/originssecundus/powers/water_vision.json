@@ -1,0 +1,9 @@
+{
+  "type": "originssecundus:status_effect",
+  "name": "Wet Eyes",
+  "description": "Your vision underwater is perfect.",
+  "effect": "minecraft:night_vision",
+  "duration": 260,
+  "condition": "in_water",
+  "show_particles": false
+}

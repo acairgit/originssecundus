@@ -1,1 +1,11 @@
 
+/.gradle/
+/build/
+/run/
+/out/
+/.idea/
+*.iml
+*.ipr
+*.iws
+*.log
+hs_err_pid*

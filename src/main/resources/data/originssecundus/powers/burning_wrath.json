@@ -1,0 +1,7 @@
+{
+  "type": "originssecundus:damage_dealt_modifier",
+  "name": "Burning Wrath",
+  "description": "When on fire, you deal additional damage with your attacks.",
+  "condition": "on_fire",
+  "multiplier": 1.5
+}

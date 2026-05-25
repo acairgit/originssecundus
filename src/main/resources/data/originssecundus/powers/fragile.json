@@ -1,0 +1,8 @@
+{
+  "type": "originssecundus:attribute",
+  "name": "Fragile",
+  "description": "You have 3 less hearts of health than humans.",
+  "attribute": "minecraft:generic.max_health",
+  "amount": -6.0,
+  "operation": "add_value"
+}

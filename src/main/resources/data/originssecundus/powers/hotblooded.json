@@ -1,0 +1,9 @@
+{
+  "type": "originssecundus:effect_immunity",
+  "name": "Hotblooded",
+  "description": "Due to your hot body, venoms burn up, making you immune to poison and hunger status effects.",
+  "effects": [
+    "minecraft:poison",
+    "minecraft:hunger"
+  ]
+}

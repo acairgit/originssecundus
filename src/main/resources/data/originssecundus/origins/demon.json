@@ -1,0 +1,35 @@
+{
+  "name": "Demon",
+  "description": "A heat-born origin inspired by the Blazeborn power set. Horns and skin overlays are placeholders for the future character editor asset pipeline.",
+  "powers": [
+    "originssecundus:fire_immunity",
+    "originssecundus:nether_spawn",
+    "originssecundus:burning_wrath",
+    "originssecundus:hotblooded",
+    "originssecundus:water_vulnerability"
+  ],
+  "icon": {
+    "item": "minecraft:blaze_powder"
+  },
+  "order": 70,
+  "impact": 2,
+  "accent_color": "#9a2f24",
+  "model_hint": "demon",
+  "customization": [
+    {
+      "key": "horn_type",
+      "label": "Horn type",
+      "type": "choice",
+      "default": "short",
+      "choices": ["short", "curved", "broken"],
+      "race_unique": true
+    },
+    {
+      "key": "ember_marks",
+      "label": "Ember marks",
+      "type": "toggle",
+      "default": "true",
+      "race_unique": true
+    }
+  ]
+}

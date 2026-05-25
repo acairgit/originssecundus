@@ -1,0 +1,15 @@
+{
+  "category.originssecundus": "Origins Secundus",
+  "key.originssecundus.primary_active": "Primary Active Power",
+  "key.originssecundus.open_origin_screen": "Open Origin Editor",
+  "screen.originssecundus.select_origin": "Select origin",
+  "screen.originssecundus.customize": "Customize",
+  "screen.originssecundus.back": "Back",
+  "screen.originssecundus.next": "Next",
+  "screen.originssecundus.confirm": "Confirm",
+  "screen.originssecundus.lock_rotation": "Lock rotation",
+  "screen.originssecundus.unlock_rotation": "Unlock rotation",
+  "message.originssecundus.origin_selected": "Origin selected: %s",
+  "message.originssecundus.origin_reset": "Origin selection reset for %s",
+  "message.originssecundus.origin_set": "Origin set for %s: %s"
+}

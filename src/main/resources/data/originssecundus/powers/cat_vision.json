@@ -1,0 +1,9 @@
+{
+  "type": "originssecundus:status_effect",
+  "name": "Nocturnal",
+  "description": "You can slightly see in the dark when not in water.",
+  "effect": "minecraft:night_vision",
+  "duration": 260,
+  "condition": "not_in_water",
+  "show_particles": false
+}

@@ -1,0 +1,5 @@
+{
+  "type": "originssecundus:passive",
+  "name": "Phasing",
+  "description": "While phantomized, you can walk through solid material, except unphasable blocks."
+}

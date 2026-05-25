@@ -1,0 +1,38 @@
+{
+  "name": "Feline",
+  "description": "With their cat-like appearance, the Feline scare creepers away. With the dexterity of cats, they always land safely on their feet.",
+  "powers": [
+    "originssecundus:fall_immunity",
+    "originssecundus:sprint_jump",
+    "originssecundus:velvet_paws",
+    "originssecundus:nine_lives",
+    "originssecundus:weak_arms",
+    "originssecundus:scare_creepers",
+    "originssecundus:cat_vision"
+  ],
+  "icon": {
+    "item": "minecraft:orange_wool"
+  },
+  "order": 30,
+  "impact": 2,
+  "accent_color": "#b07a42",
+  "model_hint": "feline",
+  "customization": [
+    {
+      "key": "ear_type",
+      "label": "Ear type",
+      "type": "choice",
+      "default": "short",
+      "choices": ["short", "tufted", "folded"],
+      "race_unique": true
+    },
+    {
+      "key": "tail",
+      "label": "Tail",
+      "type": "choice",
+      "default": "long",
+      "choices": ["long", "fluffy", "short"],
+      "race_unique": true
+    }
+  ]
+}

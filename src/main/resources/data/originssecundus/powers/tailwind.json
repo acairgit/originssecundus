@@ -1,0 +1,8 @@
+{
+  "type": "originssecundus:attribute",
+  "name": "Tailwind",
+  "description": "You are a little bit quicker on foot than others.",
+  "attribute": "minecraft:generic.movement_speed",
+  "amount": 0.1,
+  "operation": "add_multiplied_total"
+}

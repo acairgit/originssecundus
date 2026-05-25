@@ -1,0 +1,12 @@
+{
+  "name": "Human",
+  "description": "A regular human. Your ordinary Minecraft experience awaits.",
+  "powers": [],
+  "icon": {
+    "item": "minecraft:player_head"
+  },
+  "order": 0,
+  "impact": 0,
+  "accent_color": "#8a8a8a",
+  "model_hint": "humanoid"
+}

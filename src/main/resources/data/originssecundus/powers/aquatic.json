@@ -1,0 +1,8 @@
+{
+  "type": "originssecundus:damage_over_time",
+  "name": "Aquatic",
+  "description": "You need water and take damage if you stay dry for too long.",
+  "condition": "not_in_water",
+  "interval_ticks": 100,
+  "amount": 1.0
+}

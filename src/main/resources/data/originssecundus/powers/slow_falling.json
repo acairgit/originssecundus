@@ -1,0 +1,10 @@
+{
+  "type": "originssecundus:status_effect",
+  "name": "Featherweight",
+  "description": "You fall as gently to the ground as a feather would, unless you sneak.",
+  "effect": "minecraft:slow_falling",
+  "duration": 40,
+  "amplifier": 0,
+  "condition": "not_sneaking",
+  "show_particles": false
+}

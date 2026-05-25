@@ -1,0 +1,9 @@
+{
+  "type": "originssecundus:status_effect",
+  "name": "Gills",
+  "description": "You can breathe underwater, but not on land.",
+  "effect": "minecraft:water_breathing",
+  "duration": 80,
+  "condition": "in_water",
+  "show_particles": false
+}

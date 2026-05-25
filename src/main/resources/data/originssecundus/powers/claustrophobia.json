@@ -1,0 +1,20 @@
+{
+  "type": "originssecundus:status_effect",
+  "name": "Claustrophobia",
+  "description": "Being somewhere with a low ceiling for too long will weaken you and make you slower.",
+  "condition": "low_ceiling",
+  "effects": [
+    {
+      "effect": "minecraft:weakness",
+      "duration": 80,
+      "amplifier": 0,
+      "show_particles": false
+    },
+    {
+      "effect": "minecraft:slowness",
+      "duration": 80,
+      "amplifier": 0,
+      "show_particles": false
+    }
+  ]
+}

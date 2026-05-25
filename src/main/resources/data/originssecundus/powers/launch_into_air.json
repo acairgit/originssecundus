@@ -1,0 +1,7 @@
+{
+  "type": "originssecundus:active_launch",
+  "name": "Gift of the Winds",
+  "description": "Every 30 seconds, you are able to launch about 20 blocks up into the air.",
+  "velocity": 1.55,
+  "cooldown_ticks": 600
+}

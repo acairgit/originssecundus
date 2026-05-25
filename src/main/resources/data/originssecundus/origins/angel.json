@@ -1,0 +1,35 @@
+{
+  "name": "Angel",
+  "description": "A radiant winged origin built as an early Origins Secundus race placeholder. It uses Elytrian-style mobility while the final model parts are still resource-pack driven.",
+  "powers": [
+    "originssecundus:elytra",
+    "originssecundus:launch_into_air",
+    "originssecundus:aerial_combatant",
+    "originssecundus:slow_falling",
+    "originssecundus:light_armor"
+  ],
+  "icon": {
+    "item": "minecraft:golden_apple"
+  },
+  "order": 60,
+  "impact": 2,
+  "accent_color": "#d9c46a",
+  "model_hint": "angel",
+  "customization": [
+    {
+      "key": "wing_type",
+      "label": "Wing type",
+      "type": "choice",
+      "default": "layered",
+      "choices": ["layered", "swept", "haloed"],
+      "race_unique": true
+    },
+    {
+      "key": "halo",
+      "label": "Halo",
+      "type": "toggle",
+      "default": "true",
+      "race_unique": true
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "type": "originssecundus:status_effect",
+  "name": "Fins",
+  "description": "Your underwater speed is increased.",
+  "effect": "minecraft:dolphins_grace",
+  "duration": 80,
+  "condition": "in_water",
+  "show_particles": false
+}

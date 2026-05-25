@@ -1,0 +1,29 @@
+{
+  "name": "Elytrian",
+  "description": "Often flying around in the winds, Elytrians are uncomfortable when they do not have enough space above their head.",
+  "powers": [
+    "originssecundus:elytra",
+    "originssecundus:launch_into_air",
+    "originssecundus:aerial_combatant",
+    "originssecundus:light_armor",
+    "originssecundus:claustrophobia",
+    "originssecundus:more_kinetic_damage"
+  ],
+  "icon": {
+    "item": "minecraft:elytra"
+  },
+  "order": 50,
+  "impact": 1,
+  "accent_color": "#7f91b8",
+  "model_hint": "elytrian",
+  "customization": [
+    {
+      "key": "wing_shape",
+      "label": "Wing shape",
+      "type": "choice",
+      "default": "swift",
+      "choices": ["swift", "broad", "split"],
+      "race_unique": true
+    }
+  ]
+}

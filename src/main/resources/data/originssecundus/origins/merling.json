@@ -1,0 +1,29 @@
+{
+  "name": "Merling",
+  "description": "These natural inhabitants of the ocean are not used to being out of the water for too long.",
+  "powers": [
+    "originssecundus:water_breathing",
+    "originssecundus:water_vision",
+    "originssecundus:aqua_affinity",
+    "originssecundus:swim_speed",
+    "originssecundus:like_water",
+    "originssecundus:aquatic"
+  ],
+  "icon": {
+    "item": "minecraft:cod"
+  },
+  "order": 20,
+  "impact": 3,
+  "accent_color": "#2e8793",
+  "model_hint": "merling",
+  "customization": [
+    {
+      "key": "fin_shape",
+      "label": "Fin shape",
+      "type": "choice",
+      "default": "reef",
+      "choices": ["reef", "deep", "river"],
+      "race_unique": true
+    }
+  ]
+}

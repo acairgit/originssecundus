@@ -1,0 +1,28 @@
+{
+  "name": "Arachnid",
+  "description": "Their climbing abilities and the ability to trap their foes in web make the Arachnid perfect hunters.",
+  "powers": [
+    "originssecundus:climbing",
+    "originssecundus:master_of_webs",
+    "originssecundus:carnivore",
+    "originssecundus:fragile",
+    "originssecundus:arthropod"
+  ],
+  "icon": {
+    "item": "minecraft:cobweb"
+  },
+  "order": 40,
+  "impact": 1,
+  "accent_color": "#7d7d64",
+  "model_hint": "arachnid",
+  "customization": [
+    {
+      "key": "eye_cluster",
+      "label": "Eye cluster",
+      "type": "choice",
+      "default": "four",
+      "choices": ["four", "six", "eight"],
+      "race_unique": true
+    }
+  ]
+}
