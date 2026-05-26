@@ -3,6 +3,9 @@ loaderVersion="${loader_version_range}"
 license="${mod_license}"
 issueTrackerURL="https://github.com/iron-halo-team/originssecundus/issues"
 
+[[mixins]]
+    config = "originssecundus.mixins.json"
+
 [[mods]]
 modId="${mod_id}"
 version="${mod_version}"

@@ -1,13 +1,19 @@
 {
   "name": "Avian",
-  "description": "The Avian race has lost their ability to fly a long time ago. Now these peaceful creatures can be seen gliding from one place to another.",
+  "description": "The Avian race has learned to use the winds again. They glide with feathered wings, move best in open sky, and dislike cramped spaces.",
   "powers": [
+    "originssecundus:elytra",
+    "originssecundus:launch_into_air",
+    "originssecundus:aerial_combatant",
     "originssecundus:slow_falling",
     "originssecundus:fresh_air",
     "originssecundus:like_air",
     "originssecundus:tailwind",
     "originssecundus:lay_eggs",
-    "originssecundus:vegetarian"
+    "originssecundus:vegetarian",
+    "originssecundus:light_armor",
+    "originssecundus:claustrophobia",
+    "originssecundus:more_kinetic_damage"
   ],
   "icon": {
     "item": "minecraft:feather"
@@ -18,11 +24,11 @@
   "model_hint": "avian",
   "customization": [
     {
-      "key": "wing_markings",
-      "label": "Wing markings",
+      "key": "avian_wings",
+      "label": "Wings",
       "type": "choice",
-      "default": "barred",
-      "choices": ["barred", "spotted", "plain"],
+      "default": "1",
+      "choices": ["1"],
       "race_unique": true
     }
   ]

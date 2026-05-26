@@ -16,6 +16,7 @@
   "impact": 1,
   "accent_color": "#7f91b8",
   "model_hint": "elytrian",
+  "hidden": true,
   "customization": [
     {
       "key": "wing_shape",
